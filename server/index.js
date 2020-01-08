@@ -13,6 +13,9 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = socketio(server);
+const Users = require('./schema/users');
+
+
 
 app
   .use(cors)
@@ -22,9 +25,26 @@ app
 
 server.listen(port, () => console.log(`Server is listening on port ${port}...`));
 
- mongoose.connect('mongodb://localhost/ChatAppDatabase', {useNewUrlParser: true, useUnifiedTopology: true})
+ mongoose.connect('mongodb://localhost:27017/ChatAppDatabase', {useNewUrlParser: true, useUnifiedTopology: true})
   .then(console.log('Connection to database established...'))
   .catch(error => console.log(error));
+
+
+
+
+
+const createTestUser = async () => {
+  await Users.create({
+    username: 'Test user one',
+    password: 'passwordOne',
+    email: 'testeUser.One@gmail.com',
+    contacts: null,
+    chats: null
+  });
+  console.log('Done executing...');
+};
+
+createTestUser();
 
 
 

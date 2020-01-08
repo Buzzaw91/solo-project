@@ -1,7 +1,7 @@
 'use strict';
-const mongoose = require('../index');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const ObjectId = Schema.Types.ObjectId;
 
 const validateEmail = (email) => {
   const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -9,12 +9,12 @@ const validateEmail = (email) => {
 };
 
 const validatePassword = (password) => {
-
+return console.log('TODO...'); // TODO: VALIDATION
 }
 
 
 const usersSchema = new Schema({
-  _id: { type: Schema.Types.ObjectId },
+  //_id: { type: Schema.Types.ObjectId },
   username: { type: String, required: [true, 'Username required'] },
   password: { type: String,
               required: [true, 'Password required'],
@@ -28,8 +28,8 @@ const usersSchema = new Schema({
            required: 'Email required',
            validate: [validateEmail, 'Please fill with a valid email address']
   },
-  contacts: [{ type: Schema.Types.ObjectId, ref: 'Users'}],
-  chats: [{type: Schema.Types.ObjectId, ref: 'Chats'}]
+  contacts: [{ type: ObjectId, ref: 'Users'}],
+  chats: [{type: ObjectId, ref: 'Chats'}]
 
 });
 
