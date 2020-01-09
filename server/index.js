@@ -1,41 +1,30 @@
-'use strict';
 
-const express = require('express');
-const cors = require('cors');
-const socketio = require('socket.io');
-const app = express();
-const http = require('http');
-const mongoose = require('mongoose');
-const config = require('./config');
-const router = require('./routes');
-const bodyParser = require('body-parser');
-const port = process.env.PORT || 3000;
+import express from 'express'
+import dbConfig from './config/db.js'
+import ioConfig from './config/ioConfig.js'
+import configMiddlewares from './config/middlewares.js'
+import cors from 'cors'
+import http from 'http'
+import SocketIO from 'socket.io'
 
+// use port from env or 4000 if it doesn't exist. feel free to change
+const port = process.env.PORT || 4000
+const app = express()
 
+// add your cors
+app.use( cors())
 
-app
-.use(cors())
-.use(bodyParser.json())
-.use(router);
-
-const server = http.createServer(app);
-
-const io = socketio(server);
+dbConfig(app)
+configMiddlewares(app)
 
 
-// Connect to socket.io
- io.on('connection', function(socket){
-  console.log('a user connected');
-});
+const server = http.Server(app)
+export const io = new SocketIO(server)
 
+ioConfig(io)
 
-server.listen(port, () => console.log(`Server is listening on port ${port}...`));
+// inserts io to each route/to the app params
+// const { io } = req.app
+app.io = io
 
-
- mongoose.connect('mongodb://localhost:27017/ChatAppDatabase', {useNewUrlParser: true, useUnifiedTopology: true})
-  .then(console.log('Connection to database established...'))
-  .catch(error => console.log(error));
-
-
-
-module.exports = express;
+server.listen(port, () => console.log(`App listening on port ${port}`));
