@@ -32,8 +32,6 @@ function routeCreator() {
     files.forEach(route => {
       const { method, action, params} = route.file;
       const endpointUrl = `/${endpoint}/${params ? '' : route.name}${params ? params : ''}`;
-      console.log('files: ', files)
-      console.log('endpointUrl', endpointUrl)
 
       // dynamically set the express router endpoint
       router[method](endpointUrl, action);
