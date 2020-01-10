@@ -1,5 +1,5 @@
 import socketioJwt from 'socketio-jwt'
-import config from './index.js'
+import config from './index'
 
 export default io => {
   // JWT middleware for socket.io

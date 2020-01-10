@@ -12,7 +12,7 @@ function routeCreator() {
 
   // loop in all main API endpoints
   mainEndpoints.forEach(endpoint => {
-    const fileNames = fs.readdirSync(`api/${endpoint}`);
+    const fileNames = fs.readdirSync(`api/${endpoint}`)
 
     // get the contents of the files
     // each file has a method (post, get, etc...) and an action
@@ -32,10 +32,13 @@ function routeCreator() {
     files.forEach(route => {
       const { method, action, params} = route.file;
       const endpointUrl = `/${endpoint}/${params ? '' : route.name}${params ? params : ''}`;
+      console.log('files: ', files)
+      console.log('endpointUrl', endpointUrl)
 
-      console.log(endpointUrl);
       // dynamically set the express router endpoint
       router[method](endpointUrl, action);
+      // console.log(router, 'HERE--------------------->')
+
     });
 
   });

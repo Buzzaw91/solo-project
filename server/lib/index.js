@@ -1,1 +1,1 @@
-export { default as routeCreator } from './routeCreator.js';
+export { default as routeCreator } from './routeCreator';

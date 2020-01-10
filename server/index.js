@@ -1,12 +1,13 @@
 
 import express from 'express'
-import dbConfig from './config/db.js'
-import ioConfig from './config/ioConfig.js'
-import configMiddlewares from './config/middlewares.js'
+import dbConfig from './config/db'
+import ioConfig from './config/ioConfig'
+import configMiddlewares from './config/middlewares'
 import cors from 'cors'
+import https from 'https'
 import http from 'http'
 import SocketIO from 'socket.io'
-import { routeCreator } from './lib/index.js'
+import { routeCreator } from './lib/index'
 
 // use port from env or 4000 if it doesn't exist. feel free to change
 const port = process.env.PORT || 4000
@@ -18,6 +19,7 @@ app.use( cors())
 dbConfig(app)
 configMiddlewares(app)
 
+app.use(routeCreator())
 
 const server = http.Server(app)
 export const io = new SocketIO(server)

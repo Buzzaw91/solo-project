@@ -2,7 +2,7 @@ import mongo from 'mongoose';
 
 export default app => {
   mongo.Promise = global.Promise
-  mongo.connect(process.env.DB_URL, {}, async (err, db) => {
+  mongo.connect(process.env.DB_URL, {useUnifiedTopology: true, useNewUrlParser: true}, async (err, db) => {
     if (err) {
       return err
     }
