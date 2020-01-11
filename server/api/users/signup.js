@@ -6,8 +6,11 @@ async function action(req, res) {
   const { io } = req.app
   const { email, password, username } = req.body
   // check if there is a user with the same email
+  console.log(req.body)
+
   const exists = await User.findOne({ email: email.toLowerCase() })
-  if(exists) return res.status(400).send('Email already exists.')
+      if(exists) return res.status(400).send('Email already exists.')
+
 
   const newUser = new User({
     username,
