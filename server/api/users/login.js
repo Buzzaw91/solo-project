@@ -18,11 +18,8 @@ async function action(req, res) {
     // create a token
     token = jwt.sign(tokenData, config.JWT_SECRET, { expiresIn: '14d' })
 
-    console.log('user: ', user)
-    console.log('token : ', token)
-    console.log('JWT_SECRET: ',config.JWT_SECRET)
-    console.log('tokenData : ', tokenData)
   // send the token and user object as response
+  console.log('Login succesful')
   res.send({ user, token })
 }
 

@@ -1,24 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Button from '@material-ui/core/Button';
+import { Socket } from 'react-socket-io';
+import { Router, navigate, Link } from '@reach/router';
+import SignIn from './containers/SignIn';
 
-function App() {
+
+const uri = 'http://localhost/';
+const options = { transports: ['websocket'] };
+
+
+function App({ children }) {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <SignIn path="/containers/SignIn" />
+      </Router>
+    <Link to="/containers/SignIn" color="primary">Sign up</Link>
     </div>
   );
 }

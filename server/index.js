@@ -9,9 +9,9 @@ import http from 'http'
 import SocketIO from 'socket.io'
 import { routeCreator } from './lib/index'
 
-// use port from env or 4000 if it doesn't exist. feel free to change
 const port = process.env.PORT || 4000
 const app = express()
+app.disable('x-powered-by')
 
 // add your cors
 app.use( cors())
@@ -30,4 +30,4 @@ ioConfig(io)
 // const { io } = req.app
 app.io = io
 
-server.listen(port, () => console.log(`App listening on port ${port}`));
+server.listen(port, () => console.log(`App listening on port ${port}`))

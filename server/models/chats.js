@@ -5,9 +5,10 @@ const ObjectId = Schema.Types.ObjectId;
 
 
 const chatsSchema = new Schema ({
-  //_id: {types: Schema.Types.ObjectId},
-  messages: [{ type: ObjectId, ref: 'Messages', required: true }],
-  participants: [{ type: ObjectId, ref: 'User', required: true }]
+  messages: [{ type: ObjectId, ref: 'Messages'}],
+  participants: [{ type: ObjectId, ref: 'User'}],
+  createdBy: {type: ObjectId, ref: 'User'},
+  name: String
 });
 
 const Chats = mongoose.model('Chats', chatsSchema);

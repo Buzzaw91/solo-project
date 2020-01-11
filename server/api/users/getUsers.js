@@ -1,8 +1,14 @@
 import { User } from '../../models/models'
 
 async function action(req, res) {
-  const users = await User.find()
-  res.send(users)
+
+  try {
+    const users = await User.find()
+    res.send(users)
+  }
+  catch (err) {
+    console.log(err)
+  }
 }
 
 const getUsers = {
