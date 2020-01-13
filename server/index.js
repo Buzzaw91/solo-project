@@ -8,8 +8,15 @@ import https from 'https'
 import http from 'http'
 import SocketIO from 'socket.io'
 import { routeCreator } from './lib/index'
+import fs from 'fs'
+import path from 'path'
 
 const port = process.env.PORT || 4000
+const httpsOptions = {
+  cert: fs.readFileSync(path.join(__dirname, 'ssl', 'server.crt')),
+  key: fs.readFileSync(path.join(__dirname, 'ssl', 'server.key'))
+
+}
 const app = express()
 app.disable('x-powered-by')
 
@@ -29,5 +36,6 @@ ioConfig(io)
 // inserts io to each route/to the app params
 // const { io } = req.app
 app.io = io
+
 
 server.listen(port, () => console.log(`App listening on port ${port}`))
